@@ -1,0 +1,417 @@
+<title>みん経 札幌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --ground:#0B1118; --panel:#121A24; --panel2:#182232; --line:#26344A;
+  --txt:#E6EBF2; --txt2:#95A2B6; --txt3:#6D7A8E;
+  --p1:#F0A63A; --p2:#3FB0BF; --p3:#D2555F; --mkt:#56606F;
+  --up:#46B98A; --down:#E2626A; --snow:#F4F7FB;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--txt);font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;line-height:1.6;font-size:15px}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:14px 56px}
+.num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.up{color:var(--up)} .dn{color:var(--down)}
+a{color:var(--snow)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--p1);outline-offset:2px}
+
+/* top bar */
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding-block:6px 14px;border-bottom:1px solid var(--line)}
+.logo{font-family:"Dela Gothic One",sans-serif;font-size:clamp(20px,3.4vw,28px);line-height:1.1;letter-spacing:.01em}
+.logo small{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;color:var(--txt3);margin-top:4px}
+.stats{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:flex;align-items:baseline;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:12.5px;color:var(--txt2)}
+.chip b{color:var(--txt);font-size:14px;font-weight:600}
+.chip.hot{border-color:var(--p1)} .chip.hot b{color:var(--p1)}
+
+/* private banner */
+.me{margin-top:14px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--pc,var(--p1));border-radius:12px;padding:12px 14px}
+.me .dot{width:14px;height:14px;border-radius:4px;background:var(--pc,var(--p1));grid-row:span 2}
+.me b{font-size:17px} .me span{font-size:12.5px;color:var(--txt2)}
+
+/* layout */
+.main{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:18px;margin-top:16px;align-items:start}
+@media (max-width:820px){.main{grid-template-columns:1fr}}
+h2{font-size:14px;letter-spacing:.08em;color:var(--txt2);font-weight:700;margin:0 0 10px}
+.sec{margin-top:26px}
+
+/* city */
+.stage{position:relative;border-radius:16px;overflow:hidden;background:#0E1620;border:1px solid var(--line)}
+.stage canvas{display:block;width:100%;height:auto;touch-action:manipulation;cursor:pointer}
+.news{background:var(--panel);border:1px solid rgba(240,166,58,.55);border-radius:12px;padding:9px 13px;font-size:13px;margin-bottom:10px}
+.news .h{font-weight:700;font-size:14px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.news em{font-style:normal;font-size:10.5px;font-weight:700;color:#1C1204;background:var(--p1);border-radius:4px;padding:0 6px}
+.news em.boj{background:var(--snow)}
+.news p{margin:2px 0 0;color:var(--txt2);font-size:12.5px}
+.legend{position:absolute;left:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11.5px;background:rgba(11,17,24,.8);border-radius:10px;padding:4px 10px;color:var(--txt2)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.hint{font-size:12px;color:var(--txt3);margin:6px 2px 0}
+
+/* side: showcase */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.rank{display:flex;flex-direction:column;gap:12px}
+.row .nm{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:14px}
+.row .nm b{display:flex;align-items:center;gap:7px}
+.row .nm i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.bar{height:10px;border-radius:99px;background:var(--panel2);overflow:hidden;margin-top:5px}
+.bar b{display:block;height:100%;border-radius:99px}
+.row small{display:block;font-size:11.5px;color:var(--txt3);margin-top:3px}
+.empty{color:var(--txt3);font-size:13px}
+
+/* company detail */
+.co{margin-top:14px}
+.co .t{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.co .t b{font-size:18px}
+.co .t .num{font-size:18px}
+.co .k{font-size:12px;color:var(--txt2)}
+.hold{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--panel2);margin-top:8px}
+.hold b{display:block;height:100%}
+.hl{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:12px;color:var(--txt2);margin-top:5px}
+.hl i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:middle}
+
+/* companies grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.cc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;text-align:left;color:inherit;font:inherit}
+.cc[aria-pressed="true"]{border-color:var(--snow)}
+.cc .t{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.cc .t b{font-size:15.5px}
+.cc .p{display:flex;justify-content:space-between;align-items:end;gap:8px;margin-top:4px}
+.cc .p .num{font-size:20px;font-weight:600}
+.cc .f{font-size:12px;color:var(--txt3);margin-top:6px}
+.boss{font-size:11px;font-weight:700;border-radius:4px;padding:0 6px;color:#0B1118}
+
+/* moves */
+.moves{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.mv h3{margin:0 0 6px;font-size:15px;display:flex;align-items:center;gap:8px}
+.mv h3 i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.mv ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.mv li{font-size:13.5px}
+.mv li span{display:block;font-size:12px;color:var(--txt2)}
+.alert{background:#2A1418;border:1px solid var(--down);border-radius:12px;padding:10px 14px;font-size:13.5px}
+
+/* login */
+.login{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:end}
+.login .lt{flex:1 1 240px}
+.login .lt b{font-size:16px;display:block} .login .lt span{font-size:12.5px;color:var(--txt2)}
+.login label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--txt2)}
+.login select,.login input{font:inherit;font-size:15px;background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:8px 10px;min-width:0;width:170px;max-width:100%}
+.login button,.out{font:inherit;font-weight:700;font-size:14.5px;background:var(--p1);color:#1C1204;border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+.out{background:transparent;color:var(--txt2);border:1px solid var(--line);font-weight:500;font-size:13px;padding:6px 12px}
+.err{flex-basis:100%;font-size:12.5px;color:var(--down);margin:0}
+/* my page */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.tile dt{font-size:12px;color:var(--txt2)} .tile dd{margin:2px 0 0;font-size:22px;font-weight:600}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl th{font-size:12px;color:var(--txt2);font-weight:500}
+.scroll{overflow-x:auto}
+.day{border-left:2px solid var(--line);padding:2px 0 2px 14px;display:flex;flex-direction:column;gap:6px}
+.day+.day{margin-top:16px}
+.day .d{font-size:12px;color:var(--txt3);letter-spacing:.06em}
+.quote{background:var(--panel2);border-radius:10px;padding:8px 12px;font-size:13.5px;white-space:pre-wrap}
+.quote small{display:block;color:var(--txt3);font-size:11.5px;margin-bottom:2px}
+
+/* rules */
+.rules{display:flex;flex-direction:column;gap:2px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+details+details{margin-top:6px}
+summary{cursor:pointer;font-size:13.5px;font-weight:700}
+summary .num{color:var(--txt3);font-weight:500;margin-right:8px;font-size:12px}
+details p{margin:6px 0 2px;font-size:13px;color:var(--txt2);max-width:70ch}
+
+/* cta */
+.cta{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;background:var(--panel);border:1px solid var(--p1);border-radius:14px;padding:14px 16px}
+.cta b{font-size:16px} .cta span{font-size:13px;color:var(--txt2);display:block}
+.btn{display:inline-block;background:var(--p1);color:#1C1204;font-weight:700;border-radius:11px;padding:11px 18px;text-decoration:none;font-size:14.5px}
+footer{margin-top:28px;font-size:12px;color:var(--txt3);max-width:72ch}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="logo">みんなの経済戦争<small id="sub">EVERYBODY'S ECONOMIC WAR ／ 札幌</small></div>
+    <div class="stats" id="stats"></div>
+  </header>
+  <div id="mebox"></div>
+  <section class="sec" id="mysec" hidden></section>
+
+  <div class="main">
+    <section aria-label="札幌の街">
+      <div class="news" id="news"></div>
+      <div class="stage" id="stage">
+        <canvas id="city" width="640" height="440" aria-label="札幌の街を斜め上から見た図。6社のビルの屋上が社長の色で塗られている"></canvas>
+        <div class="legend" id="legend"></div>
+      </div>
+      <p class="hint">ビルか下の会社をタップ＝その会社の株主が見られる。屋上の色＝社長（51株以上）。地面の色＝今日の株価の上がり下がり。</p>
+    </section>
+    <aside>
+      <div class="card">
+        <h2 id="rankh">見せ合い（値打ち）</h2>
+        <div class="rank" id="rank"></div>
+        <div class="co" id="co"></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="sec" aria-labelledby="h-cos">
+    <h2 id="h-cos">札幌の6社</h2>
+    <div class="grid" id="cos"></div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-mv" id="mvsec">
+    <h2 id="h-mv">今日の動き</h2>
+    <div id="alerts"></div>
+    <div class="moves" id="moves"></div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-rules">
+    <h2 id="h-rules">判例帳（審判の規則）</h2>
+    <div class="rules" id="rules"></div>
+  </section>
+
+  <section class="sec">
+    <div class="cta">
+      <div><b id="ctah">作戦を出す</b><span id="ctas"></span></div>
+      <a class="btn" id="form" href="#" target="_blank" rel="noopener">作戦フォームを開く</a>
+    </div>
+  </section>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const DATA={"turn":1,"rate":0.75,"next_deadline":"9/25（金）21時","updated":"9/24 21:04","companies":{"北海ビール":{"price":3.0335297153671794,"kind":"ビール","feature":"円安に弱い"},"ニトロ家具":{"price":5.174698391441682,"kind":"家具","feature":"海外で作って輸入・よく伸びる"},"札北銀行":{"price":2.960927717657555,"kind":"銀行","feature":"日銀が金利を上げると儲かる"},"セイカマート":{"price":2.5772756359507385,"kind":"コンビニ","feature":"天気に左右される"},"北海鉄道":{"price":3.994395602270574,"kind":"鉄道","feature":"借金が多い・観光に強い"},"白い恋文製菓":{"price":4.900830827392017,"kind":"お菓子","feature":"観光に強い・借金ほぼなし"}},"history":{"北海ビール":[3,3.0335297153671794],"ニトロ家具":[5,5.174698391441682],"札北銀行":[2,2.960927717657555],"セイカマート":[2.5,2.5772756359507385],"北海鉄道":[4,3.994395602270574],"白い恋文製菓":[3.5,4.900830827392017]},"order":["あんぽん10","サニー","竈門ジョバーナ"],"last":{"turn":1,"acts":{"あんぽん10":[{"text":"札北銀行を30株買った（78万円）","why":"「銀行をありったけ買い占める」＝判例帳R2（持ち金と1日30株の範囲で買えるだけ）・札北銀行は街で唯一の銀行"}],"サニー":[{"text":"札北銀行を30株買った（69万円）","why":"作戦どおり30株"},{"text":"白い恋文製菓を30株買った（125万円）","why":"作戦どおり30株"}],"竈門ジョバーナ":[{"text":"白い恋文製菓を30株買った（111万円）","why":"作戦どおり30株"},{"text":"札北銀行を20株買った（42万円）","why":"作戦どおり20株"}]},"alerts":[],"news":{"head":"住宅ローンの借り換えが増える","why":"銀行に手数料と新しい貸出が入る","hits":[["札北銀行",5]]},"rate":0.75,"prices":{"北海ビール":{"price":3.0335297153671794,"prev":3},"ニトロ家具":{"price":5.174698391441682,"prev":5},"札北銀行":{"price":2.960927717657555,"prev":2},"セイカマート":{"price":2.5772756359507385,"prev":2.5},"北海鉄道":{"price":3.994395602270574,"prev":4},"白い恋文製菓":{"price":4.900830827392017,"prev":3.5}},"players":{"あんぽん10":{"worth":411.60525411542085,"hold":{"北海ビール":0,"ニトロ家具":0,"札北銀行":30,"セイカマート":0,"北海鉄道":0,"白い恋文製菓":0},"jail":0},"サニー":{"worth":442.6443314183776,"hold":{"北海ビール":0,"ニトロ家具":0,"札北銀行":30,"セイカマート":0,"北海鉄道":0,"白い恋文製菓":30},"jail":0},"竈門ジョバーナ":{"worth":454.3939598297288,"hold":{"北海ビール":0,"ニトロ家具":0,"札北銀行":20,"セイカマート":0,"北海鉄道":0,"白い恋文製菓":30},"jail":0}}},"rules":[{"id":"R1","day":0,"title":"株は1日1社30株まで","body":"初日に1人が100%買い占めて誰も手を出せなくなるのを防ぐ（試遊1の穴2）。買い占めには2日以上かかる＝相手が気づいて動ける。"},{"id":"R2","day":0,"title":"「ありったけ」「全部」は、持ち金と上限の範囲で買えるだけ","body":"額や株数が書いていない手は聞き返さず、この規則で裁く（F6）。"},{"id":"R3","day":0,"title":"作戦を出さなかった日は「何もしない」","body":"株と会社はそのまま、時間とニュースだけが進む。"},{"id":"R4","day":0,"title":"51株以上で社長（経営権）","body":"会社の利益の半分が毎月入る。会社として動かせる（設備・出店・提携）。株を持っているだけでも、時価の0.5%が毎月配当で入る。"},{"id":"R5","day":0,"title":"設備投資（社長だけ）","body":"自分のお金を会社に入れる。8割は会社の資産として株価に乗る。効き始めるまで1〜2か月（例：太陽光2か月・ATM1か月）、その後は毎月の利益が増える。（試遊1で確定）"},{"id":"R6","day":0,"title":"出店・全国展開（社長だけ）","body":"会社が銀行から借りて出す（持ち主の現金は減らない）。額の指定が無ければ時価の約3割。発表時に株価−2%、来月から新店の売上。30%で道外の大手が値引きで迎え撃ち、新店の稼ぎが半分。借金が増える＝利上げに弱くなる。（試遊1で確定）"},{"id":"R7","day":0,"title":"固定金利（社長だけ）","body":"利上げの打撃が4分の1に。代わりに毎月の利益が少し減る（固定は変動より金利が高い）。「もともと固定だった」は、その時に書いていなければ無効（F5）。（試遊1で確定）"},{"id":"R8","day":0,"title":"提携・株の持ち合い","body":"相手に申し込み、相手が次の日に受けたら成立。条件の一部だけ受けることもできる。値の差はお金で調整する。（試遊1で確定）"},{"id":"R9","day":0,"title":"悪い手は打てるが、バレたら捕まる","body":"相場操縦＝株価+15%、毎日35%で逮捕→保釈金300万円・1日取引停止。粉飾＝株価+20%、毎日30%で発覚→株価半分。談合＝毎月+40万円、25%で発覚→課徴金。先に自首した人は課徴金なし。数字は試遊の仮置き（現実の率は未確認）。"},{"id":"R10","day":0,"title":"狙いは解釈にだけ使う","body":"「この作戦の狙い」は、あいまいな手を正しく読むためにだけ使う。狙いの上手さで結果は良くならない（F11）。"},{"id":"R11","day":0,"title":"異議申し立て","body":"1日1回、次の締切まで。通るのは①手の読み違い ②規則との食い違い・計算の誤り の2つだけ。通っても却下でも、理由を付けて全員に見せる（F12）。"}],"form":"https://forms.gle/eiDPPmtULQ69wdAS7"};
+const SEC={};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
+const PC=[css('p1'),css('p2'),css('p3')];
+const players=DATA.order;                      // ゲーム名の並び（色の順）
+const color=p=>{const i=players.indexOf(p);return i<0?css('mkt'):PC[i%3]};
+const man=v=>(Math.round(v)).toLocaleString('ja-JP')+'万';
+const pct=(a,b)=>b?((a/b-1)*100):0;
+const sgn=v=>(v>=0?'+':'−')+Math.abs(v).toFixed(1)+'%';
+const T=DATA.last;                              // 直近のターン結果（無ければ null）
+const COS=Object.keys(DATA.companies);
+let selected=null;
+
+/* ---- top chips ---- */
+(function(){
+  const day=DATA.turn;
+  const c=[];
+  c.push(`<span class="chip">${day?`<b>${day}日目</b>の結果`:'<b>スタート前</b>'}</span>`);
+  c.push(`<span class="chip">ゲーム内 <b>${day}か月目</b></span>`);
+  c.push(`<span class="chip">政策金利 <b class="num">${DATA.rate.toFixed(2)}%</b></span>`);
+  c.push(`<span class="chip hot">次の締切 <b>${esc(DATA.next_deadline)}</b></span>`);
+  $('stats').innerHTML=c.join('');
+})();
+
+/* ---- login ---- */
+const LS='minkei2_login';
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function unlock(name,pass){
+  const e=SEC[name]; if(!e)throw new Error('none');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pass),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(e.s),iterations:150000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(e.i)},key,b64(e.c));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+function loginForm(msg){
+  const names=Object.keys(SEC);
+  if(!names.length){
+    $('mebox').innerHTML=`<div class="login"><div class="lt"><b>ログイン</b><span>1日目の締切（${esc(DATA.next_deadline)}）の後から使えます。作戦フォームで「合言葉」を登録しておくと、ここにゲーム名と合言葉を入れて、あなただけのダッシュボード（現金・借金・作戦と裁き）が見られます。</span></div></div>`;
+    return;
+  }
+  $('mebox').innerHTML=`<form class="login" id="lf"><div class="lt"><b>ログイン</b><span>ゲーム名と合言葉で、あなただけのダッシュボードが開きます。</span></div>
+  <label for="ln">ゲーム名<select id="ln">${names.map(n=>`<option>${esc(n)}</option>`).join('')}</select></label>
+  <label for="lp">合言葉<input id="lp" type="password" autocomplete="current-password" required></label>
+  <button type="submit">ログイン</button>${msg?`<p class="err">${esc(msg)}</p>`:''}</form>`;
+  $('lf').addEventListener('submit',async ev=>{ev.preventDefault();
+    const n=$('ln').value,pw=$('lp').value;
+    try{const d=await unlock(n,pw);try{localStorage.setItem(LS,JSON.stringify({n,pw}))}catch(_){} showMe(n,d)}
+    catch(_){loginForm('ゲーム名か合言葉が違います。合言葉は作戦フォームで登録したものです（大文字・小文字も区別します）。')}
+  });
+}
+function logout(){try{localStorage.removeItem(LS)}catch(_){} $('mysec').hidden=true;$('mysec').innerHTML='';loginForm()}
+(async()=>{let saved=null;try{saved=JSON.parse(localStorage.getItem(LS)||'null')}catch(_){}
+  if(saved&&SEC[saved.n]){try{showMe(saved.n,await unlock(saved.n,saved.pw));return}catch(_){}}
+  loginForm();})();
+
+/* ---- news ---- */
+(function(){
+  let h='';
+  if(T){
+    h+=`<div class="h"><em>ニュース</em>${esc(T.news.head)}</div><p>なぜ＝${esc(T.news.why)}</p>`;
+    if(T.boj)h+=`<div class="h" style="margin-top:6px"><em class="boj">日銀</em>${T.boj.up?'利上げ → 政策金利 '+T.boj.rate.toFixed(2)+'%':'金利は据え置き（'+T.boj.rate.toFixed(2)+'%）'}</div><p>${esc(T.boj.why)}</p>`;
+  }else{
+    h+=`<div class="h"><em>スタート前</em>1日目の締切は ${esc(DATA.next_deadline)}</div><p>全員の作戦が出そろったら、審判（AI）が現実の経済に近い規則で裁いて、この街が動きます。日銀の会合は3・6・9日目。</p>`;
+  }
+  $('news').innerHTML=h;
+  const lg=players.map(p=>`<span><i style="background:${color(p)}"></i>${esc(p)}</span>`).join('')+`<span><i style="background:${css('mkt')}"></i>社長なし</span>`;
+  $('legend').innerHTML=lg;
+})();
+
+/* ---- ranking ---- */
+function rankHTML(){
+  if(!T||!players.length)return `<p class="empty">1日目の結果が出たら、ここに全員の値打ち（現金−借金＋株＋投資の将来の稼ぎ）が並びます。スタートは全員400万円。</p>`;
+  const rows=players.map(p=>({p,w:T.players[p].worth})).sort((a,b)=>b.w-a.w);
+  const max=Math.max(...rows.map(r=>r.w),400);
+  return rows.map(r=>{const d=r.w-400;return `<div class="row"><div class="nm"><b><i style="background:${color(r.p)}"></i>${esc(r.p)}</b><span class="num">${man(r.w)} <span class="${d>=0?'up':'dn'}">(${d>=0?'+':'−'}${man(Math.abs(d))})</span></span></div><div class="bar"><b style="width:${(r.w/max*100).toFixed(1)}%;background:${color(r.p)}"></b></div></div>`}).join('');
+}
+$('rank').innerHTML=rankHTML();
+
+/* ---- company detail ---- */
+function holders(c){
+  const list=players.map(p=>({p,n:(T&&T.players[p])?T.players[p].hold[c]:0})).filter(x=>x.n>0);
+  const used=list.reduce((a,x)=>a+x.n,0);
+  return {list,mkt:100-used};
+}
+function coDetail(c){
+  const co=DATA.companies[c], h=holders(c), boss=h.list.find(x=>x.n>=51);
+  const pr=co.price, pv=T?T.prices[c].prev:co.price, ch=pct(pr,pv);
+  return `<div class="t"><b>${esc(c)}</b><span class="num">${pr.toFixed(2)}万 <span class="${ch>=0?'up':'dn'}" style="font-size:13px">${T?sgn(ch):''}</span></span></div>
+  <div class="k">${esc(co.kind)}・${esc(co.feature)}${boss?` ／ 社長＝<b style="color:${color(boss.p)}">${esc(boss.p)}</b>`:' ／ 社長なし'}</div>
+  <div class="hold">${h.list.map(x=>`<b style="width:${x.n}%;background:${color(x.p)}"></b>`).join('')}<b style="width:${h.mkt}%;background:${css('mkt')};opacity:.45"></b></div>
+  <div class="hl">${h.list.map(x=>`<span><i style="background:${color(x.p)}"></i>${esc(x.p)} ${x.n}株</span>`).join('')}<span><i style="background:${css('mkt')}"></i>市場 ${h.mkt}株</span></div>`;
+}
+function select(c){
+  selected=c; $('co').innerHTML=coDetail(c);
+  document.querySelectorAll('.cc').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===c?'true':'false'));
+  draw();
+}
+
+/* ---- companies grid ---- */
+function spark(hist){
+  const w=90,h=26,mn=Math.min(...hist),mx=Math.max(...hist),r=mx-mn||1;
+  if(hist.length<2)return '';
+  const pts=hist.map((v,i)=>`${(i/(hist.length-1)*w).toFixed(1)},${(h-2-(v-mn)/r*(h-4)).toFixed(1)}`).join(' ');
+  const up=hist[hist.length-1]>=hist[0];
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${up?css('up'):css('down')}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+}
+$('cos').innerHTML=COS.map(c=>{
+  const co=DATA.companies[c], pv=T?T.prices[c].prev:co.price, ch=pct(co.price,pv), h=holders(c), boss=h.list.find(x=>x.n>=51);
+  return `<button type="button" class="cc" data-c="${esc(c)}" aria-pressed="false">
+    <div class="t"><b>${esc(c)}</b>${boss?`<span class="boss" style="background:${color(boss.p)}">社長 ${esc(boss.p)}</span>`:''}</div>
+    <div class="p"><span class="num">${co.price.toFixed(2)}<small style="font-size:12px;color:var(--txt2)">万/株</small></span><span>${spark(DATA.history[c])}</span></div>
+    <div class="k" style="font-size:12.5px">${T?`<span class="${ch>=0?'up':'dn'} num">${sgn(ch)}</span> 今日`:'スタート時の株価'}</div>
+    <div class="hold">${h.list.map(x=>`<b style="width:${x.n}%;background:${color(x.p)}"></b>`).join('')}<b style="width:${h.mkt}%;background:${css('mkt')};opacity:.45"></b></div>
+    <div class="f">${esc(co.kind)}＝${esc(co.feature)}</div></button>`;
+}).join('');
+document.querySelectorAll('.cc').forEach(b=>b.addEventListener('click',()=>select(b.dataset.c)));
+
+/* ---- moves ---- */
+(function(){
+  if(!T){$('mvsec').hidden=true;return}
+  $('alerts').innerHTML=(T.alerts||[]).map(a=>`<div class="alert">★ ${esc(a)}</div>`).join('');
+  $('moves').innerHTML=players.map(p=>`<div class="card mv"><h3><i style="background:${color(p)}"></i>${esc(p)}</h3><ul>${(T.acts[p]||[]).map(a=>`<li>${esc(a.text)}${a.why?`<span>なぜ＝${esc(a.why)}</span>`:''}</li>`).join('')}</ul></div>`).join('');
+})();
+
+/* ---- rules ---- */
+$('rules').innerHTML=DATA.rules.map(r=>`<details${r.day===DATA.turn&&DATA.turn>0?' open':''}><summary><span class="num">${esc(r.id)}${r.day?'・'+r.day+'日目に追加':''}</span>${esc(r.title)}</summary><p>${esc(r.body)}</p></details>`).join('');
+
+/* ---- cta ---- */
+$('form').href=DATA.form;
+$('ctas').textContent=`締切は毎日21時（次は ${DATA.next_deadline}）。何度出し直してもOK・最後の1通が有効。`;
+$('foot').textContent=`会社・数字は試遊用の仮（実在の会社ではありません）。審判＝AI（イーロン）。規則は結果の前に判例帳へ書き、乱数は全員の作戦から作ります（後出しできない仕組み）。最終更新：${DATA.updated}`;
+
+/* ---- my page ---- */
+function showMe(me,D){
+  const sec=$('mysec'); sec.hidden=false;
+  $('mebox').innerHTML=`<div class="me" style="--pc:${color(me)}"><i class="dot"></i><b>${esc(me)} さんのダッシュボード</b><span>ログイン中（この端末に覚えています） <button type="button" class="out" id="lo">ログアウト</button></span></div>`;
+  $('lo').addEventListener('click',logout);
+  const P=D.P, rank=players.map(p=>T.players[p].worth).sort((a,b)=>b-a).indexOf(P.worth)+1;
+  const hold=COS.filter(c=>P.hold[c]>0);
+  let h=`<h2>あなたの状況（${DATA.turn}日目の後）</h2>
+  <dl class="tiles"><div class="tile"><dt>値打ち</dt><dd class="num">${man(P.worth)}</dd></div><div class="tile"><dt>現金</dt><dd class="num">${man(P.cash)}</dd></div><div class="tile"><dt>借金</dt><dd class="num">${man(P.loan)}</dd></div><div class="tile"><dt>見せ合いの順位</dt><dd class="num">${rank}位 / ${players.length}人</dd></div></dl>`;
+  h+=`<div class="card" style="margin-top:12px"><div class="scroll"><table class="tbl"><thead><tr><th>持ち株</th><th>株数</th><th>株価</th><th>時価</th><th>社長</th></tr></thead><tbody>${hold.length?hold.map(c=>`<tr><td>${esc(c)}</td><td class="num">${P.hold[c]}</td><td class="num">${DATA.companies[c].price.toFixed(2)}万</td><td class="num">${man(P.hold[c]*DATA.companies[c].price)}</td><td>${P.hold[c]>=51?'★':''}</td></tr>`).join(''):'<tr><td colspan="5" style="text-align:left;color:var(--txt3)">まだ株を持っていません</td></tr>'}</tbody></table></div></div>`;
+  h+=`<h2 style="margin-top:22px">あなたの作戦と裁き</h2><div>`;
+  for(const d of D.mine.slice().reverse()){
+    h+=`<div class="day"><div class="d">${d.turn}日目</div>`;
+    if(d.plan)h+=`<div class="quote"><small>あなたの作戦</small>${esc(d.plan)}</div>`;
+    if(d.aim)h+=`<div class="quote"><small>狙い</small>${esc(d.aim)}</div>`;
+    h+=`<ul style="margin:0;padding-left:1.1em;font-size:13.5px">${d.acts.map(a=>`<li>${esc(a.text)}${a.why?`<span style="display:block;color:var(--txt2);font-size:12px">なぜ＝${esc(a.why)}</span>`:''}</li>`).join('')}</ul>`;
+    if(d.secret&&d.secret.length)h+=`<div class="quote"><small>あなたにだけ見える記録</small>${d.secret.map(esc).join('\n')}</div>`;
+    if(d.gm)h+=`<div class="quote"><small>審判から</small>${esc(d.gm)}</div>`;
+    if(d.objection)h+=`<div class="quote"><small>異議申し立て → ${esc(d.objection_result||'次の裁きの前に判定')}</small>${esc(d.objection)}</div>`;
+    h+=`</div>`;
+  }
+  h+=`</div>`;
+  sec.innerHTML=h;
+}
+
+/* ---- city (isometric) ---- */
+const LM={"札北銀行":[4,3],"北海鉄道":[1,2],"ニトロ家具":[6,6],"セイカマート":[1,6],"北海ビール":[6,1],"白い恋文製菓":[5,5]};
+const N=9, ROAD=3, PARK=4;
+function rnd(i,j){const h=Math.sin(i*127.1+j*311.7)*43758.5453;return h-Math.floor(h)}
+let hit=[];
+function draw(){
+  const cv=$('city'), st=$('stage'), W=st.clientWidth, H=Math.round(W*(W<520?0.95:0.72)), dpr=window.devicePixelRatio||1;
+  cv.width=W*dpr; cv.height=H*dpr; cv.style.height=H+'px';
+  const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
+  const TW=W/(N+0.4), TH=TW/2, ox=W/2, oy=H-(N*TH)-TH*0.9;
+  g.fillStyle='#0E1620'; g.fillRect(0,0,W,H);
+  const P=(i,j)=>[ox+(i-j)*TW/2, oy+(i+j)*TH/2];
+  const dia=(x,y,w,h)=>{g.beginPath();g.moveTo(x,y-h/2);g.lineTo(x+w/2,y);g.lineTo(x,y+h/2);g.lineTo(x-w/2,y);g.closePath()};
+  const lmAt={}; for(const c in LM)lmAt[LM[c].join(',')]=c;
+  const heatOf=c=>{if(!T)return 0;const v=pct(T.prices[c].price,T.prices[c].prev)/12;return Math.max(-1,Math.min(1,v))};
+  const hc=v=>v>=0?`rgba(70,185,138,${.10+v*.6})`:`rgba(226,98,106,${.10-v*.6})`;
+  const labels=[]; hit=[];
+  for(let s=0;s<2*N-1;s++)for(let i=0;i<N;i++){const j=s-i;if(j<0||j>=N)continue;
+    const [x,y]=P(i,j), c=lmAt[i+','+j];
+    dia(x,y,TW,TH);
+    const road=i===ROAD, park=j===PARK&&!road, tower=park&&i===N-1;
+    g.fillStyle=road?'#1A212B':park?'#2F5A3C':'#1C2530'; g.fill();
+    if(c){dia(x,y,TW*1.02,TH*1.02);g.fillStyle=hc(heatOf(c));g.fill();}
+    g.strokeStyle='rgba(0,0,0,.35)';g.lineWidth=.6;dia(x,y,TW,TH);g.stroke();
+    if(road){g.strokeStyle='rgba(230,200,120,.35)';g.setLineDash([3,3]);g.beginPath();g.moveTo(x-TW/4,y-TH/4);g.lineTo(x+TW/4,y+TH/4);g.stroke();g.setLineDash([]);continue}
+    if(park&&!tower){g.fillStyle='#3F7A4E';for(const [a,b] of [[-.18,0],[.13,-.05],[0,.1]]){g.beginPath();g.arc(x+a*TW,y+b*TW-2,TW*.08,0,7);g.fill();}continue}
+    if(tower){const k=TW/38;g.strokeStyle='#C9793A';g.lineWidth=1.4;g.beginPath();g.moveTo(x-6*k,y+2);g.lineTo(x,y-78*k);g.lineTo(x+6*k,y+2);g.stroke();
+      for(let q=1;q<6;q++){const yy=y+2-q*13*k,w=6*k*(1-q/6.5);g.beginPath();g.moveTo(x-w,yy);g.lineTo(x+w,yy);g.stroke();}continue}
+    let h, roof, stroke=null, w=TW*.78, hh=TH*.78;
+    if(c){
+      const co=DATA.companies[c], cap=co.price*100; h=TW*(0.75+Math.min(cap,900)/900*0.85);
+      const hl=holders(c), boss=hl.list.find(x=>x.n>=51), top=hl.list.slice().sort((a,b)=>b.n-a.n)[0];
+      roof=boss?color(boss.p):'#6A7484'; if(!boss&&top&&top.n>=20)stroke=color(top.p);
+      w=TW*.86; hh=TH*.86;
+    }else{
+      const r=rnd(i,j),dc=Math.hypot(i-3.5,j-4); h=TW*(.25+(1-Math.min(dc/5.5,1))*1.05*(.5+r*.6)); roof='#3B4555';
+    }
+    g.beginPath();g.moveTo(x-w/2,y);g.lineTo(x,y+hh/2);g.lineTo(x,y+hh/2-h);g.lineTo(x-w/2,y-h);g.closePath();g.fillStyle=c?'#46505F':'#2E3744';g.fill();
+    g.beginPath();g.moveTo(x,y+hh/2);g.lineTo(x+w/2,y);g.lineTo(x+w/2,y-h);g.lineTo(x,y+hh/2-h);g.closePath();g.fillStyle=c?'#343D4A':'#232B36';g.fill();
+    g.strokeStyle=c?'rgba(200,220,240,.18)':'rgba(180,205,230,.08)';g.lineWidth=.8;
+    for(let f=6;f<h-2;f+=Math.max(4,TW/8)){g.beginPath();g.moveTo(x-w/2+1,y-f);g.lineTo(x,y+hh/2-f);g.lineTo(x+w/2-1,y-f);g.stroke();}
+    dia(x,y-h,w,hh);g.fillStyle=roof;g.fill();
+    if(stroke){g.strokeStyle=stroke;g.lineWidth=2;dia(x,y-h,w,hh);g.stroke();}
+    if(c){
+      if(selected===c){g.strokeStyle='#fff';g.lineWidth=2;dia(x,y-h,w,hh);g.stroke();}
+      labels.push([x,y-h-hh/2-4,c]); hit.push({c,x,y:y-h/2,r:Math.max(w,h)/1.6});
+    }
+  }
+  const fs=Math.max(10,Math.min(13,W/48)); const placed=[];
+  labels.sort((a,b)=>a[1]-b[1]);
+  for(const [x,y,c] of labels){
+    const co=DATA.companies[c], ch=T?pct(T.prices[c].price,T.prices[c].prev):null;
+    const a=c, b=co.price.toFixed(2)+'万'+(ch===null?'':' '+sgn(ch));
+    g.font=`700 ${fs}px "Zen Kaku Gothic New",sans-serif`; const w1=g.measureText(a).width;
+    g.font=`600 ${fs-1}px "IBM Plex Mono",monospace`; const w2=g.measureText(b).width;
+    const bw=Math.max(w1,w2)+12, bh=fs*2+10, bx=Math.max(4,Math.min(x-bw/2,W-bw-4)); let by=Math.max(4,y-bh);
+    const ov=yy=>placed.some(q=>bx<q[0]+q[2]+3&&bx+bw+3>q[0]&&yy<q[1]+q[3]+3&&yy+bh+3>q[1]);
+    let tries=0; while(ov(by)&&tries++<12){by+= (by-bh-4>=4 && tries<6)? -(bh+4) : (bh+4);} placed.push([bx,by,bw,bh]);
+    g.fillStyle='rgba(11,17,24,.86)';g.beginPath();g.roundRect?g.roundRect(bx,by,bw,bh,6):g.rect(bx,by,bw,bh);g.fill();
+    if(selected===c){g.strokeStyle='#fff';g.lineWidth=1.2;g.stroke();}
+    g.textAlign='center';g.fillStyle='#E6EBF2';g.font=`700 ${fs}px "Zen Kaku Gothic New",sans-serif`;g.fillText(a,bx+bw/2,by+fs+2);
+    g.font=`600 ${fs-1}px "IBM Plex Mono",monospace`;g.fillStyle=ch===null?'#95A2B6':ch>=0?css('up'):css('down');g.fillText(b,bx+bw/2,by+fs*2+5);
+  }
+}
+$('city').addEventListener('click',e=>{
+  const r=$('city').getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+  let best=null,bd=1e9; for(const h of hit){const d=Math.hypot(h.x-x,h.y-y); if(d<h.r*1.4&&d<bd){bd=d;best=h.c}}
+  if(best)select(best);
+});
+select(COS.includes('札北銀行')?'札北銀行':COS[0]);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+addEventListener('resize',draw);
+</script>
